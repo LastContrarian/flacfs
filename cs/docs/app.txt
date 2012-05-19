@@ -1,6 +1,0 @@
-flac\Utils\CRC8.cs
-flac\Utils\CRC16.cs
-flac\Io\UTF8Decoder.cs
-flac\Io\UTF8Encoder.cs
-
-based on code from jflac
