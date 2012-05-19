@@ -12,3 +12,11 @@ The software is licensed under GPLv2 (or, at your option, any subsequent version
 * flac\Io\UTF8Encoder.cs
 
 are based on/copied from the jflac project [http://jflac.sourceforge.net] which is in turn based on the original libflac project [http://flac.sourceforge.net] which is licenced under the GNU Library General Public License v2 or above.
+
+Copyright for the code:
+
+Copyright (c) 2009-2012 Last Contrarian (a.k.a Aristotle the Geek) <last.contrarian@gmail.com>. All rights reserved. Portions copyright (c) 2000-2003 Josh Coalson.
+
+Copyright for the contents of the cs/docs folder (licensed under the Creative Commons Attribution-ShareAlike License 3.0):
+
+Copyright (c) 2009-2012 Last Contrarian (a.k.a Aristotle the Geek) <last.contrarian@gmail.com>. All rights reserved.
