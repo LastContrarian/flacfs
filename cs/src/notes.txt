@@ -1,0 +1,55 @@
+* Apl files have the starting and ending sample numbers of the file.
+* Each frame has multiple subframes, one for each channel.
+* Each frame can be a fixed stream, or a variable stream.
+* Each sub frame of a frame has the number of samples, and bits per sample, mentioned in the frame header.
+* Samples may lie in the middle of the frame, and they may end in the middle too. In such cases, a new variable frame has to be created as the first frame. All frames wil have to be marked as variable and the sample number, instead of the frame number, encoded in them.
+
+
+don't write such valueless information.
+the file should use our knowledge of the flac format.
+* We know that we have to modify the metadata. say that.
+* We know that we have to patch the first and last partial frames. say that.
+* We know that we have to patch every frame header. say that.
+
+store offsets of each frame. everything else can be done at runtime.
+
+A .virtualflac file contains patching information. It can also contain "meta" information.
+<virtualflac>
+	<track filename="" size=""> <!-- how should it appear in the vfs. prefilled -->
+		<patches>
+			<patch startOffset="0" count="8">
+				<copy startOffset="0" />
+				<replace offset="4:7" value="1" /> <~-- changing the 'is last block' flag -->
+			</patch>
+			<patch startOffset="8" count="10">
+				<bytes><!-- bytes --></bytes>
+			</patch>
+			<patch startOffset="18" count="8">
+				<copy startOffset="18" />
+				<replace offset="22:3" count="4" value="xxxx" /><!-- count, value are bits. Means change bits 3-0 -->
+				<replace offset=23" count="4" value="xxxxxxxx" />
+			</patch>
+			<patch startOffset="26" count="16">
+				<set>xx</set>
+			</patch>
+
+			<patch startOffset="42" count="4">
+				<copy startOffset="xx" /><!-- whereever the frame is located (which is) always on byte boundary -->
+				<replace offset=43:0" count="1" value="1" /> <!-- set it to variable -->
+			</patch>
+			<patch startOffset="46" count="x"> <!-- sample number. fill with parsed value -->
+				<bytes>xx....</bytes>
+			</patch>
+			... <!-- misc till crc8 -->
+			<patch startOffset="x" count="1">
+				<bytes>xx</bytes><!-- compute and store crc value -->
+			</patch>
+			
+			... data. At the start and end partial subframe data will have to be stored. Otherwise, it is a direct copy.
+	
+			<!-- and so on -->
+		</patches>
+		<metadata>
+		</metadata>
+	</track>
+</virtualflac>

@@ -1,0 +1,5 @@
+The VS solution expects the following files to be in this directory:
+Mono.Fuse.dll
+Mono.Posix.dll
+libMonoFusehelper.so
+DokanNet.dll
